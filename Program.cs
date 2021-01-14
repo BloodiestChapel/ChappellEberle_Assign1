@@ -62,7 +62,7 @@ namespace ChappellEberle_Assign1
 
             readonly uint id;               // Read only
             readonly string name;           // Read only
-            readonly Racial race;           // Read only
+            readonly Race race;             // Read only
             uint level;                     // Free read/write access; Range is [0, MAX_LEVEL]
 
             uint exp;                      /* Read access & write access but the write access
@@ -86,8 +86,8 @@ namespace ChappellEberle_Assign1
         // Menu Class
         class Menu
         {
-            // Ten options for Player
-            // ----------------------
+            // Menu Options
+            // ------------
             // 1. Print All Players
 
             // 2. Print All Guilds
