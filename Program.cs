@@ -81,6 +81,27 @@ namespace ChappellEberle_Assign1
                                             * appropriate/convenient. */
 
             List<uint> inventory;           // Will not have a corresponding Property.
+
+            /* Need Default and Alt Constructors
+             * Default assigns 0, "", or null to all 
+             * attributes.
+             * Alt takes as many arguments as necessary
+             * to give initial values to all attributes,
+             * including an array of unsigned integers 
+             * to assign to the gear attribute. */
+            public void playerDefault()
+            {
+                level = 0;
+                exp = 0;
+                guildID = 0;
+                gear[MAX_INVENTORY_SIZE] = 0;
+                
+            }
+
+            public void playerAlt()
+            {
+
+            }
         }
 
         // Menu Class
