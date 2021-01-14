@@ -65,27 +65,27 @@ namespace ChappellEberle_Assign1
     class Player
     {
 
-        readonly uint id;       // Read only
-        readonly string name;   // Read only
-        readonly Racial race;   // Read only
-        uint level;             // Free read/write access; Range is [0, MAX_LEVEL]
+        readonly uint id;               // Read only
+        readonly string name;           // Read only
+        readonly Racial race;           // Read only
+        uint level;                     // Free read/write access; Range is [0, MAX_LEVEL]
 
-        uint exp;               /* Read access & write access but the write access
-                                 * should instead increment the value of exp by...
-                                 * value. If this should make the exp value exceed
-                                 * the required experience for this player to
-                                 * increase their level (but not exceed MAX_LEVEL),
-                                 * it should do as such. */
+        uint exp;                       /* Read access & write access but the write access
+                                         * should instead increment the value of exp by...
+                                         * value. If this should make the exp value exceed
+                                         * the required experience for this player to
+                                         * increase their level (but not exceed MAX_LEVEL),
+                                         * it should do as such. */
 
-        uint guildID;           // Free read/write access
+        uint guildID;                   // Free read/write access
 
-        uint[] gear;            /* Instead of a Property, you should create an 
-                                 * Indexer to allow access to gear. 
-                                 * NOTE: You don't have to define this as an array. 
-                                 * You may use whatever Collection you feel is most
-                                 * appropriate/convenient. */
+        uint[] gear;                    /* Instead of a Property, you should create an 
+                                         * Indexer to allow access to gear. 
+                                         * NOTE: You don't have to define this as an array. 
+                                         * You may use whatever Collection you feel is most
+                                         * appropriate/convenient. */
 
-        List<uint> inventory;   // Will not have a corresponding Property.
+        List<uint> inventory;           // Will not have a corresponding Property.
     }
 
     // Menu Class
