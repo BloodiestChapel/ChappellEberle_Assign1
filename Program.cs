@@ -56,7 +56,28 @@ namespace ChappellEberle_Assign1
             public uint primary;           // Free read/write access; Range is [0, MAX_PRIMARY] 
             public uint stamina;           // Free read/write access; Range is [0, MAX_STAMINA] 
             public uint requirement;       // Free read/write access; Range is [0, MAX_LEVEL] 
-            public string flavor;          // Free read/write access 
+            public string flavor;          // Free read/write access
+                                           
+            // Default Constructor
+            // Set All values to 0 or "".
+            public void ItemConstruct()
+            {
+                name = "";
+                Type = 0;
+                ilvl = 0;
+                primary = 0;
+                stamina = 0;
+                requirement = 0;
+                flavor = "";
+            }
+
+            // Alt Constructor
+            // For when you want to provide initial values
+            public void ItemConstructAlt()
+            {
+
+            }
+
         }
 
         // Player Class
@@ -136,12 +157,6 @@ namespace ChappellEberle_Assign1
             // 11. IComparable Testing Method (Not shown in menu,
             //                             but accessed with "T")
         }
-
-        // Default Constructor
-        // Set All values to 0
-
-        // Alt Constructor
-        // For when you want to provide initial values
 
         // Overridden ToString method
 
