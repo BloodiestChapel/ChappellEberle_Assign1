@@ -44,6 +44,9 @@ namespace ChappellEberle_Assign1
 
 
         // Item Class
+        // Needs to implenent the "IComparable" interface
+        // This means we need "public int CompareTo(object alpha)"
+        // to be defined. Sort by Name.
         class Item
         {
             public readonly uint id;       // Read only
@@ -134,6 +137,14 @@ namespace ChappellEberle_Assign1
             //                             but accessed with "T")
         }
 
+        // Default Constructor
+        // Set All values to 0
+
+        // Alt Constructor
+        // For when you want to provide initial values
+
+        // Overridden ToString method
+
         // Equip Gear Method
         public void EquipGear(uint newGearID)
         {
@@ -148,6 +159,125 @@ namespace ChappellEberle_Assign1
 
         static void Main(string[] args)
         {
+            // Number 10 (All the different way to quit program)
+            var exitStatements = new string[] { "10", "q", "Q", "quit", "Quit", "exit", "Exit" };
+
+            string UInput = "";     //Users input variable
+
+            // Decide what to do with input
+            do
+            {
+                // Print out the menu
+                System.Console.WriteLine("Welcome to the World of ConflictCraft: Testing Enviroment \n");
+                System.Console.WriteLine("Please select an option from the list below: ");
+                System.Console.WriteLine("\t 1) Print All Players ");
+                System.Console.WriteLine("\t 2) Print All Guilds ");
+                System.Console.WriteLine("\t 3) List all Gear ");
+                System.Console.WriteLine("\t 4) Print Gear List for Player ");
+                System.Console.WriteLine("\t 5) Leave Guild ");
+                System.Console.WriteLine("\t 6) Join Guild ");
+                System.Console.WriteLine("\t 7) Equip Gear ");
+                System.Console.WriteLine("\t 8) Unequip Gear ");
+                System.Console.WriteLine("\t 9) Award Experience ");
+                System.Console.WriteLine("\t 10) Quit ");
+
+                // Collects input from user
+                UInput = Console.ReadLine();
+
+                switch (UInput)
+                {
+                    case "1":
+                        // 1. Print All Players
+                        System.Console.WriteLine("1");  
+                        break;
+
+                    case "2":
+                        // 2. Print All Guilds
+                        System.Console.WriteLine("2");  
+                        break;
+
+                    case "3":
+                        // 3. List all Gear
+                        System.Console.WriteLine("3");  
+                        break;
+
+                    case "4":
+                        // 4. Print Gear List for Player
+                        System.Console.WriteLine("4");  
+                        break;
+
+                    case "5":
+                        // 5. Leave Guild
+                        System.Console.WriteLine("5");
+                        break;
+
+                    case "6":
+                        // 6. Join Guild
+                        System.Console.WriteLine("6");
+                        break;
+
+                    case "7":
+                        // 7. Equip Gear
+                        System.Console.WriteLine("7");
+                        break;
+
+                    case "8":
+                        // 8. Unequip Gear
+                        System.Console.WriteLine("8");  
+                        break;
+
+                    case "9":
+                        // 9. Award Experience
+                        System.Console.WriteLine("9");
+                        break;
+
+                    case "T":
+                        // 9*. Don't show in menu but Icomparble
+                        System.Console.WriteLine("T");
+                        break;
+
+                    case "10":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "q":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "Q":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "quit":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "Quit":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "exit":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    case "Exit":
+                        // 10. Quit
+                        System.Console.WriteLine("Closing Program");
+                        break;
+
+                    default:
+                        // Invalid Input
+                        System.Console.WriteLine("Not a valid input. Try again");
+                        break;
+                }
+
+            } while (!exitStatements.Contains(UInput));
         }
     }
 }
