@@ -44,6 +44,9 @@ namespace ChappellEberle_Assign1
 
 
         // Item Class
+        // Needs to implenent the "IComparable" interface
+        // This means we need "public int CompareTo(object alpha)"
+        // to be defined. Sort by Name.
         class Item
         {
             public readonly uint id;       // Read only
@@ -113,6 +116,14 @@ namespace ChappellEberle_Assign1
             //                             but accessed with "T")
         }
 
+        // Default Constructor
+        // Set All values to 0
+
+        // Alt Constructor
+        // For when you want to provide initial values
+
+        // Overridden ToString method
+
         // Equip Gear Method
         public void EquipGear(uint newGearID)
         {
@@ -127,7 +138,9 @@ namespace ChappellEberle_Assign1
 
         static void Main(string[] args)
         {
-            var exitStatements = new string[] { "10", "q", "Q", "quit", "Quit", "exit", "Exit" }; //Number 10 (All the different way to quit program)
+            // Number 10 (All the different way to quit program)
+            var exitStatements = new string[] { "10", "q", "Q", "quit", "Quit", "exit", "Exit" };
+
             string UInput = "";     //Users input variable
 
             // Decide what to do with input
