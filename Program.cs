@@ -73,9 +73,16 @@ namespace ChappellEberle_Assign1
 
             // Alt Constructor
             // For when you want to provide initial values
-            public void ItemConstructAlt()
+            // for all attributes
+            public void ItemConstructAlt(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
             {
-
+                name = initName;
+                Type = initType;
+                ilvl = initIlvl;
+                primary = initPrimary;
+                stamina = initStamina;
+                requirement = initRequirement;
+                flavor = initFlavor;
             }
 
         }
