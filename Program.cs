@@ -60,7 +60,7 @@ namespace ChappellEberle_Assign1
                                            
             // Default Constructor
             // Set All values to 0 or "".
-            public void ItemConstruct()
+            public Item()
             {
                 name = "";
                 Type = 0;
@@ -74,7 +74,7 @@ namespace ChappellEberle_Assign1
             // Alt Constructor
             // For when you want to provide initial values
             // for all attributes
-            public void ItemConstructAlt(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
+            public Item(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
             {
                 name = initName;
                 Type = initType;
