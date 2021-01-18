@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ChappellEberle_Assign1
 {
@@ -58,7 +60,7 @@ namespace ChappellEberle_Assign1
                                            
             // Default Constructor
             // Set All values to 0 or "".
-            public Item()
+            public void ItemConstruct()
             {
                 name = "";
                 Type = 0;
@@ -72,7 +74,7 @@ namespace ChappellEberle_Assign1
             // Alt Constructor
             // For when you want to provide initial values
             // for all attributes
-            public Item(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
+            public void ItemConstructAlt(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
             {
                 name = initName;
                 Type = initType;
@@ -130,28 +132,31 @@ namespace ChappellEberle_Assign1
             // 6. Join Guild
 
             // 7. Equip Gear
-            public void EquipGear(uint newGearID)
-            {
-
-            }
 
             // 8. Unequip Gear
-            public void UnequipGear(int gearSlot)
-            {
-
-            }
 
             // 9. Award Experience
 
-            /* 10. Quit (Triggered by entering "10", "q", "Q",
-                       "quit", "Quit", "exit", or "Exit") */
+            // 10. Quit (Triggered by entering "10", "q", "Q",
+            //           "quit", "Quit", "exit", or "Exit")
 
-            /* 11. IComparable Testing Method (Not shown in menu,
-                                   but accessed with "T") */
+            // 11. IComparable Testing Method (Not shown in menu,
+            //                             but accessed with "T")
         }
 
         // Overridden ToString method
 
+        // Equip Gear Method
+        public void EquipGear(uint newGearID)
+        {
+
+        }
+
+        // Unequip Gear Method
+        public void UnequipGear(int gearSlot)
+        {
+
+        }
 
         static void Main(string[] args)
         {
@@ -160,7 +165,7 @@ namespace ChappellEberle_Assign1
 
             string UInput = "";     //Users input variable
 
-            // Decide what to... DO... with input
+            // Decide what to do with input
             do
             {
                 // Print out the menu
