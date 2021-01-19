@@ -169,6 +169,14 @@ namespace ChappellEberle_Assign1
                 return alpha.name.CompareTo(this.name);
             }
 
+            // Override ToString function in Player
+            public override string ToString()
+            {
+                return this.name.ToString() 
+                    + ", " + this.race.ToString() 
+                    + ", " + this.guildID.ToString();
+            }
+
 
         }
 
@@ -202,12 +210,20 @@ namespace ChappellEberle_Assign1
             //                             but accessed with "T")
         }
 
+        // The main function's only real job is simply
+        // reading the input files, then getting the ball
+        // rolling on the menu-loop. My main method was
+        // 63 lines of code long.
         static void Main(string[] args)
         {
+            // Read input files
+
+
             // Number 10 (All the different way to quit program)
             var exitStatements = new string[] { "10", "q", "Q", "quit", "Quit", "exit", "Exit" };
 
-            string UInput = "";     //Users input variable
+            // Users input variable
+            string UInput = "";     
 
             // Decide what to do with input
             do
@@ -233,92 +249,99 @@ namespace ChappellEberle_Assign1
                 {
                     case "1":
                         // 1. Print All Players
-                        System.Console.WriteLine("1");  
+                        System.Console.WriteLine("Print All Players");  
                         break;
 
                     case "2":
                         // 2. Print All Guilds
-                        System.Console.WriteLine("2");  
+                        System.Console.WriteLine("Print All Guilds");  
                         break;
 
                     case "3":
-                        // 3. List all Gear
-                        System.Console.WriteLine("3");  
+                        // 3. List All Gear
+                        System.Console.WriteLine("List All Gear");  
                         break;
 
                     case "4":
                         // 4. Print Gear List for Player
-                        System.Console.WriteLine("4");  
+                        System.Console.WriteLine("Print Gear List for Player");  
                         break;
 
                     case "5":
                         // 5. Leave Guild
-                        System.Console.WriteLine("5");
+                        System.Console.WriteLine("Leave Guild");
                         break;
 
                     case "6":
                         // 6. Join Guild
-                        System.Console.WriteLine("6");
+                        System.Console.WriteLine("Join Guild");
                         break;
 
                     case "7":
                         // 7. Equip Gear
-                        System.Console.WriteLine("7");
+                        System.Console.WriteLine("Equip Gear");
                         break;
 
                     case "8":
                         // 8. Unequip Gear
-                        System.Console.WriteLine("8");  
+                        System.Console.WriteLine("Unequip Gear");  
                         break;
 
                     case "9":
                         // 9. Award Experience
-                        System.Console.WriteLine("9");
+                        System.Console.WriteLine("Award Experience");
                         break;
 
                     case "T":
-                        // 9*. Don't show in menu but Icomparble
-                        System.Console.WriteLine("T");
+                        // 9*. Don't show in menu but IComparable Method
+                        System.Console.WriteLine("IComparable Method");
                         break;
 
                     case "10":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "q":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "Q":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "quit":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "Quit":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "exit":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     case "Exit":
                         // 10. Quit
-                        System.Console.WriteLine("Closing Program");
+                        System.Console.WriteLine("Closing Program...");
+                        System.Threading.Thread.Sleep(500);
                         break;
 
                     default:
                         // Invalid Input
-                        System.Console.WriteLine("Not a valid input. Try again");
+                        System.Console.WriteLine("Invalid input. Try again...");
                         break;
                 }
 
