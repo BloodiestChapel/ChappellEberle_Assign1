@@ -47,7 +47,7 @@ namespace ChappellEberle_Assign1
         // Needs to implenent the "IComparable" interface
         // This means we need "public int CompareTo(object alpha)"
         // to be defined. Sort by Name.
-        class Item
+        class Item : IComparable<Item>
         {
             public readonly uint id;       // Read only
             public string name;            // Free read/write access
@@ -58,8 +58,7 @@ namespace ChappellEberle_Assign1
             public uint requirement;       // Free read/write access; Range is [0, MAX_LEVEL] 
             public string flavor;          // Free read/write access
                                            
-            // Default Constructor
-            // Set All values to 0 or "".
+            // Default Item Constructor
             public Item()
             {
                 name = "";
@@ -72,8 +71,6 @@ namespace ChappellEberle_Assign1
             }
 
             // Alt Constructor
-            // For when you want to provide initial values
-            // for all attributes
             public Item(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
             {
                 name = initName;
@@ -85,10 +82,26 @@ namespace ChappellEberle_Assign1
                 flavor = initFlavor;
             }
 
+            // Implementing IComparable interface with a CompareTo function
+            public int CompareTo(Item alpha)
+            {
+                if(this.name == alpha.name)
+                {
+                    return this.name.CompareTo(this.name);
+                }
+
+                return alpha.name.CompareTo(this.name);
+            }
+
+            // Override ToString function in Item
+            public override string ToString()
+            {
+                return this.name.ToString();
+            }
         }
 
         // Player Class
-        class Player
+        class Player : IComparable<Player>
         {
 
             readonly uint id;               // Read only
@@ -112,6 +125,51 @@ namespace ChappellEberle_Assign1
                                             * appropriate/convenient. */
 
             List<uint> inventory;           // Will not have a corresponding Property.
+
+            // Default Player Constructor
+            public Player()
+            {
+                level = 0;
+                exp = 0;
+                guildID = 0;
+                gear = new uint[0];
+                inventory = new List<uint> {0};
+            }
+
+            // Alternate Player Constructor
+            public Player(uint initLevel, uint initExp, uint initGuildID, uint[] initGear, List<uint> initInventory)
+            {
+                level = initLevel;
+                exp = initExp;
+                guildID = initGuildID;
+                gear = initGear;
+                inventory = initInventory;
+            }
+
+            // Equip Gear Method
+            public void EquipGear(uint newGearID)
+            {
+
+            }
+
+            // Unequip Gear Method
+            public void UnequipGear(int gearSlot)
+            {
+
+            }
+
+            // Implementing IComparable interface with a CompareTo function in Player
+            public int CompareTo(Player alpha)
+            {
+                if (this.name == alpha.name)
+                {
+                    return this.name.CompareTo(this.name);
+                }
+
+                return alpha.name.CompareTo(this.name);
+            }
+
+
         }
 
         // Menu Class
@@ -142,20 +200,6 @@ namespace ChappellEberle_Assign1
 
             // 11. IComparable Testing Method (Not shown in menu,
             //                             but accessed with "T")
-        }
-
-        // Overridden ToString method
-
-        // Equip Gear Method
-        public void EquipGear(uint newGearID)
-        {
-
-        }
-
-        // Unequip Gear Method
-        public void UnequipGear(int gearSlot)
-        {
-
         }
 
         static void Main(string[] args)
