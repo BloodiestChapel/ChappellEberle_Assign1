@@ -1,14 +1,15 @@
-﻿/********************************************
- * CSCI 473 - Assignment 1 - Spring 2021    *
- *                                          *
- * Progammer: Dillon Chappell (z1761203)    *
- * Progammer: Rhianna Eberle (z1848017)     *
- * Section:   1                             *
- * Professor: Daniel Rogness                *
- * Date Due:  January 29, 2021              *
- *                                          *
- * Purpose:   Program.cs                    *
- ********************************************/
+﻿/***********************************************
+ * CSCI 473 - Assignment 1 - Spring 2021       *
+ *                                             *
+ * Progammer: Dillon Chappell (z1761203)       *
+ *            Rhianna Eberle (z1848017)        *
+ *            Karen Astorga-Rollins (z1761117) *
+ * Section:   1                                *
+ * Professor: Daniel Rogness                   *
+ * Date Due:  January 29, 2021                 *
+ *                                             *
+ * Purpose:   Program.cs                       *
+ ***********************************************/
 
 using System;
 using System.IO;
@@ -22,255 +23,80 @@ namespace ChappellEberle_Assign1
 {
     class Program 
     {
-        // Item Types
-        public enum ItemType
+        public static void Main(string[] args)
         {
-            Helmet,
-            Neck,
-            Shoulders,
-            Back,
-            Chest,
-            Wrist,
-            Gloves,
-            Belt,
-            Pants,
-            Boots,
-            Ring,
-            Trinket
-        };
-
-        // Races
-        public enum Race
-        {
-            Orc,
-            Troll,
-            Tauren,
-            Forsaken
-        };
-
-        // Global Constants
-        private static uint MAX_ILVL            = 360;
-        private static uint MAX_PRIMARY         = 200;
-        private static uint MAX_STAMINA         = 275;
-        private static uint MAX_LEVEL           = 60;
-        private static uint GEAR_SLOTS          = 14;
-        private static uint MAX_INVENTORY_SIZE  = 20;
-
-
-        // Item Class
-        // Needs to implenent the "IComparable" interface
-        // This means we need "public int CompareTo(object alpha)"
-        // to be defined. Sort by Name.
-        class Item : IComparable<Item>
-        {
-            public readonly uint id;       // Read only
-            public string name;            // Free read/write access
-            public ItemType Type;          // Free read/write access; Range is [0, 12]
-            public uint ilvl;              // Free read/write access; Range is [0, MAX_ILVL] 
-            public uint primary;           // Free read/write access; Range is [0, MAX_PRIMARY] 
-            public uint stamina;           // Free read/write access; Range is [0, MAX_STAMINA] 
-            public uint requirement;       // Free read/write access; Range is [0, MAX_LEVEL] 
-            public string flavor;          // Free read/write access
-                                           
-            // Default Item Constructor
-            public Item()
-            {
-                name = "";
-                Type = 0;
-                ilvl = 0;
-                primary = 0;
-                stamina = 0;
-                requirement = 0;
-                flavor = "";
-            }
-
-            // Alt Constructor
-            public Item(string initName, ItemType initType, uint initIlvl, uint initPrimary, uint initStamina, uint initRequirement, string initFlavor)
-            {
-                name = initName;
-                Type = initType;
-                ilvl = initIlvl;
-                primary = initPrimary;
-                stamina = initStamina;
-                requirement = initRequirement;
-                flavor = initFlavor;
-            }
-
-            // Implementing IComparable interface with a CompareTo function
-            public int CompareTo(Item alpha)
-            {
-                if(this.name == alpha.name)
-                {
-                    return this.name.CompareTo(this.name);
-                }
-
-                return alpha.name.CompareTo(this.name);
-            }
-
-            // Override ToString function in Item
-            public override string ToString()
-            {
-                return this.name.ToString();
-            }
-        }
-
-        // Player Class
-        class Player : IComparable<Player>
-        {
-
-            readonly uint id;               // Read only
-            readonly string name;           // Read only
-            readonly Race race;             // Read only
-            uint level;                     // Free read/write access; Range is [0, MAX_LEVEL]
-
-            uint exp;                      /* Read access & write access but the write access
-                                            * should instead increment the value of exp by...
-                                            * value. If this should make the exp value exceed
-                                            * the required experience for this player to
-                                            * increase their level (but not exceed MAX_LEVEL),
-                                            * it should do as such. */
-
-            uint guildID;                   // Free read/write access
-
-            uint[] gear;                   /* Instead of a Property, you should create an 
-                                            * Indexer to allow access to gear. 
-                                            * NOTE: You don't have to define this as an array. 
-                                            * You may use whatever Collection you feel is most
-                                            * appropriate/convenient. */
-
-            List<uint> inventory;           // Will not have a corresponding Property.
-
-            // Default Player Constructor
-            public Player()
-            {
-                level = 0;
-                exp = 0;
-                guildID = 0;
-                gear = new uint[0];
-                inventory = new List<uint> {0};
-            }
-
-            // Alternate Player Constructor
-            public Player(uint initLevel, uint initExp, uint initGuildID, uint[] initGear, List<uint> initInventory)
-            {
-                level = initLevel;
-                exp = initExp;
-                guildID = initGuildID;
-                gear = initGear;
-                inventory = initInventory;
-            }
-
-            // Equip Gear Method
-            public void EquipGear(uint newGearID)
-            {
-
-            }
-
-            // Unequip Gear Method
-            public void UnequipGear(int gearSlot)
-            {
-
-            }
-
-            // Implementing IComparable interface with a CompareTo function in Player
-            public int CompareTo(Player alpha)
-            {
-                if (this.name == alpha.name)
-                {
-                    return this.name.CompareTo(this.name);
-                }
-
-                return alpha.name.CompareTo(this.name);
-            }
-
-            // Override ToString function in Player
-            public override string ToString()
-            {
-                return this.name.ToString() 
-                    + ", " + this.race.ToString() 
-                    + ", " + this.guildID.ToString();
-            }
-
-
-        }
-
-        // Menu Class
-        class Menu
-        {
-            // Menu Options
-            // ------------
-            // 1. Print All Players
-
-            // 2. Print All Guilds
-
-            // 3. Print All Gear
-
-            // 4. Print Gear List for Player
-
-            // 5. Leave Guild
-
-            // 6. Join Guild
-
-            // 7. Equip Gear
-
-            // 8. Unequip Gear
-
-            // 9. Award Experience
-
-            // 10. Quit (Triggered by entering "10", "q", "Q",
-            //           "quit", "Quit", "exit", or "Exit")
-
-            // 11. IComparable Testing Method (Not shown in menu,
-            //                             but accessed with "T")
-        }
-
-        // The main function's only real job is simply
-        // reading the input files, then getting the ball
-        // rolling on the menu-loop. My main method was
-        // 63 lines of code long.
-        static void Main(string[] args)
-        {
-            // Read File Input
-            // string playerFile = System.IO.File.ReadAllText(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\players.txt");
+            // Read File Input for each file
+            StreamReader playerFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\players.txt");
+            StreamReader guildFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\guilds.txt");
+            StreamReader equipmentFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\equipment.txt");
 
             // For lines in playerFile
-            string line;
+            string playerLine;
+            string guildLine;
+            string equipmentLine;
 
-            StreamReader playerFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\players.txt");
+            // Formatted output
+            var allPlayers = new System.Text.StringBuilder();
+            var allGuilds = new System.Text.StringBuilder();
+            var allEquipment = new System.Text.StringBuilder();
 
-            // For each line
-            while ((line = playerFile.ReadLine()) != null)
+            // Trying to fix shit
+            Player PlayerCurrent;
+
+            // Store guilds in dict
+            Dictionary<uint, string> guildDict = new Dictionary<uint, string>();
+
+            // Guilds File Reading
+            while ((guildLine = guildFile.ReadLine()) != null)
             {
-                if(lineCounter == 1)
-                {
-                    // Seperate each line by tabs
-                    string[] playerElement = line.Split('\t');
+                string[] guildElement = guildLine.Split('\t');
 
-                    Player player1 = new Player(
-                        Convert.ToUInt32(playerElement[0]),                 // Player ID element
-                        playerElement[1],                                   // Player Name element
-                        (Race)Enum.Parse(typeof(Race), playerElement[3]),   // Player Race element
-                        Convert.ToUInt32(playerElement[4]),                 // Player Level element
-                        Convert.ToUInt32(playerElement[5]),                 // Player XP element
-                        Convert.ToUInt32(playerElement[6]),                 // Player GuildID element
-                        new uint[] {Convert.ToUInt32(playerElement[7]),     // Player Gear elements
-                                    Convert.ToUInt32(playerElement[8]),
-                                    Convert.ToUInt32(playerElement[9]),
-                                    Convert.ToUInt32(playerElement[11]),
-                                    Convert.ToUInt32(playerElement[12]),
-                                    Convert.ToUInt32(playerElement[13]),
-                                    Convert.ToUInt32(playerElement[14]),
-                                    Convert.ToUInt32(playerElement[15]),
-                                    Convert.ToUInt32(playerElement[16]),
-                                    Convert.ToUInt32(playerElement[17]),
-                                    Convert.ToUInt32(playerElement[18])}
-                        );
-                }
+                guildDict.Add(Convert.ToUInt32(guildElement[0]), guildElement[1]);
+            }
+            
 
-                if (lineCounter == 2)
-                {
-                    // Seperate each line by tabs
-                    string[] playerElement = line.Split('\t');
+            // Player File Reading
+            while ((playerLine = playerFile.ReadLine()) != null)
+            {
+                string[] playerElement = playerLine.Split('\t');
+
+                // For each line
+                PlayerCurrent = new Player(
+                    Convert.ToUInt32(playerElement[0]),                 // Player ID element
+                    playerElement[1],                                   // Player Name element
+                    (Race)Enum.Parse(typeof(Race), playerElement[2]),   // Player Race element
+                    Convert.ToUInt32(playerElement[3]),                 // Player Level element
+                    Convert.ToUInt32(playerElement[4]),                 // Player XP element
+                    Convert.ToUInt32(playerElement[5]),                 // Player GuildID element
+                    new uint[] {
+                        Convert.ToUInt32(playerElement[6]),             // Player Gear elements
+                        Convert.ToUInt32(playerElement[7]),
+                        Convert.ToUInt32(playerElement[8]),
+                        Convert.ToUInt32(playerElement[9]),
+                        Convert.ToUInt32(playerElement[10]),
+                        Convert.ToUInt32(playerElement[11]),
+                        Convert.ToUInt32(playerElement[12]),
+                        Convert.ToUInt32(playerElement[13]),
+                        Convert.ToUInt32(playerElement[14]),
+                        Convert.ToUInt32(playerElement[15]),
+                        Convert.ToUInt32(playerElement[16]),
+                        Convert.ToUInt32(playerElement[17]),
+                        Convert.ToUInt32(playerElement[18]),
+                        Convert.ToUInt32(playerElement[19])
+                        }
+                    );
+
+                // If guildID is equal to 
+
+
+                allPlayers.Append(String.Format(
+                    "Name: {0, -17} Race: {1, -12} Level: {2, -6} Guild: {3, -15} \n",
+                    PlayerCurrent.PlayerName,
+                    PlayerCurrent.Race,
+                    PlayerCurrent.PlayerLevel,
+                    PlayerCurrent.GuildID)
+                    );
+            }
 
             // Number 10 (All the different way to quit program)
             var exitStatements = new string[] { "10", "q", "Q", "quit", "Quit", "exit", "Exit" };
@@ -303,11 +129,22 @@ namespace ChappellEberle_Assign1
                     case "1":
                         // 1. Print All Players
                         System.Console.WriteLine("Print All Players");
+
+                        // Print out name property of all players
+                        Console.Out.WriteLine(allPlayers);
+
                         break;
 
                     case "2":
                         // 2. Print All Guilds
-                        System.Console.WriteLine("Print All Guilds");  
+                        System.Console.WriteLine("Print All Guilds");
+
+                        // Print out each guild name
+                        foreach(KeyValuePair<uint, string> element in guildDict)
+                            {
+                            Console.WriteLine("{0}", element.Value);
+                            }
+
                         break;
 
                     case "3":
@@ -399,6 +236,11 @@ namespace ChappellEberle_Assign1
                 }
 
             } while (!exitStatements.Contains(UInput));
+            
+            /*
+            Console.WriteLine("Press enter to close...");
+            Console.ReadLine();
+            */
         }
 
         // Item Types
@@ -436,11 +278,11 @@ namespace ChappellEberle_Assign1
         private static uint MAX_INVENTORY_SIZE  = 20;
 
         // Item Class
-        public class Item : ICompareable 
+        public class Item : IComparable
         {
             public readonly uint id;    // Read only
             public string name;         // Free read/write access
-            public ItemType Type;       // Free read/write access; Range is [0, 12]
+            public ItemType type;       // Free read/write access; Range is [0, 12]
             public uint ilvl;           // Free read/write access; Range is [0, MAX_ILVL] 
             public uint primary;        // Free read/write access; Range is [0, MAX_PRIMARY] 
             public uint stamina;        // Free read/write access; Range is [0, MAX_STAMINA] 
@@ -461,11 +303,11 @@ namespace ChappellEberle_Assign1
             }
 
             // Alt Item Constructor
-            public Item(uint id, string name, ItemType type, uint ilvl, uint primary, uint stamina, uint requirement, string flavor)
+            public Item(uint id, string name, ItemType Type, uint ilvl, uint primary, uint stamina, uint requirement, string flavor)
             {
                 this.id                 = id;
                 this.name               = name;
-                this.type               = type;
+                this.type               = Type;
                 this.ilvl               = ilvl;
                 this.primary            = primary;
                 this.stamina            = stamina;
@@ -639,7 +481,7 @@ namespace ChappellEberle_Assign1
             }
 
             // Alt Player Constructor
-            public Player(uint playerId, string playerName, Race race, uint playerLevel, uint exp, uint guildID, uint[] gear, List<uint> inventory)
+            public Player(uint playerId, string playerName, Race race, uint playerLevel, uint exp, uint guildID, uint[] gear)
             {
                 this.playerId           = playerId;
                 this.playerName         = playerName;
@@ -648,7 +490,7 @@ namespace ChappellEberle_Assign1
                 this.exp                = exp;
                 this.guildID            = guildID;
                 this.gear               = new uint[GEAR_SLOTS];
-                this.inventory          = new List<uint>(new uint[MAX_INVENTORY_SIZE]);
+                //this.inventory          = new List<uint>(new uint[MAX_INVENTORY_SIZE]);
             }
 
             // PlayerID Get
