@@ -94,7 +94,7 @@ namespace ChappellEberle_Assign1
                     PlayerCurrent.PlayerName,
                     PlayerCurrent.Race,
                     PlayerCurrent.PlayerLevel,
-                    PlayerCurrent.GuildID)
+                    guildDict[PlayerCurrent.GuildID])
                     );
             }
 
