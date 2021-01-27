@@ -28,20 +28,20 @@ namespace ChappellEberle_Assign1
             // Read File Input for each file
             StreamReader playerFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\players.txt");
             StreamReader guildFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\guilds.txt");
-            StreamReader equipmentFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\equipment.txt");
+            StreamReader itemFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\equipment.txt");
 
             // For lines in playerFile
             string playerLine;
             string guildLine;
-            string equipmentLine;
+            string itemLine;
 
             // Formatted output
             var allPlayers = new System.Text.StringBuilder();
-            var allGuilds = new System.Text.StringBuilder();
-            var allEquipment = new System.Text.StringBuilder();
+            var allItems = new System.Text.StringBuilder();
 
             // Trying to fix shit
             Player PlayerCurrent;
+            Item ItemCurrent;
 
             // Store guilds in dict
             Dictionary<uint, string> guildDict = new Dictionary<uint, string>();
@@ -53,9 +53,35 @@ namespace ChappellEberle_Assign1
 
                 guildDict.Add(Convert.ToUInt32(guildElement[0]), guildElement[1]);
             }
-            
+
+            while ((itemLine = itemFile.ReadLine()) != null)
+            {
+                string[] itemElement = itemLine.Split('\t');
+
+                ItemCurrent = new Item(
+                    Convert.ToUInt32(itemElement[0]),                       // Item ID element
+                    itemElement[1],                                         // Item Name element
+                    (ItemType)Enum.Parse(typeof(ItemType), itemElement[2]), // Item Type element
+                    Convert.ToUInt32(itemElement[3]),                       // Item iLvl element
+                    Convert.ToUInt32(itemElement[4]),                       // Item Primary element
+                    Convert.ToUInt32(itemElement[5]),                       // Item Stamina element
+                    Convert.ToUInt32(itemElement[6]),                       // Item Requirement element
+                    itemElement[7]                                          // Item flavor element
+                    );
+
+                allItems.Append(String.Format(
+                    "({0}) {1} |{2}| --{3}-- \n\t{4} \n",
+                    ItemCurrent.Type,
+                    ItemCurrent.Name,
+                    ItemCurrent.Ilvl,
+                    ItemCurrent.Requirement,
+                    ItemCurrent.Flavor)
+                    );
+            }
+
 
             // Player File Reading
+            // Note: Needed to be implemented as a Dictionary. Fix before turning in.
             while ((playerLine = playerFile.ReadLine()) != null)
             {
                 string[] playerElement = playerLine.Split('\t');
@@ -68,8 +94,8 @@ namespace ChappellEberle_Assign1
                     Convert.ToUInt32(playerElement[3]),                 // Player Level element
                     Convert.ToUInt32(playerElement[4]),                 // Player XP element
                     Convert.ToUInt32(playerElement[5]),                 // Player GuildID element
-                    new uint[] {
-                        Convert.ToUInt32(playerElement[6]),             // Player Gear elements
+                    new uint[] {                                        // Player Gear elements
+                        Convert.ToUInt32(playerElement[6]),             
                         Convert.ToUInt32(playerElement[7]),
                         Convert.ToUInt32(playerElement[8]),
                         Convert.ToUInt32(playerElement[9]),
@@ -85,9 +111,6 @@ namespace ChappellEberle_Assign1
                         Convert.ToUInt32(playerElement[19])
                         }
                     );
-
-                // If guildID is equal to 
-
 
                 allPlayers.Append(String.Format(
                     "Name: {0, -17} Race: {1, -12} Level: {2, -6} Guild: {3, -15} \n",
@@ -149,7 +172,11 @@ namespace ChappellEberle_Assign1
 
                     case "3":
                         // 3. List All Gear
-                        System.Console.WriteLine("List All Gear");  
+                        System.Console.WriteLine("List All Gear");
+
+                        // Print out all gear
+                        Console.Out.WriteLine(allItems);
+
                         break;
 
                     case "4":
@@ -490,7 +517,7 @@ namespace ChappellEberle_Assign1
                 this.exp                = exp;
                 this.guildID            = guildID;
                 this.gear               = new uint[GEAR_SLOTS];
-                //this.inventory          = new List<uint>(new uint[MAX_INVENTORY_SIZE]);
+                this.inventory          = new List<uint>(new uint[MAX_INVENTORY_SIZE]);
             }
 
             // PlayerID Get
