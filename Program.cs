@@ -25,9 +25,9 @@ namespace ChappellEberle_Assign1
         public static void Main(string[] args)
         {
             // Read File Input for each file
-            StreamReader playerFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\players.txt");
-            StreamReader guildFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\guilds.txt");
-            StreamReader itemFile = new StreamReader(@"C:\Users\Dillon\source\repos\ChappellEberle_Assign1\equipment.txt");
+            StreamReader playerFile = new StreamReader(@"players.txt");
+            StreamReader guildFile = new StreamReader(@"guilds.txt");
+            StreamReader itemFile = new StreamReader(@"equipment.txt");
 
             // For lines in playerFile
             string playerLine;
@@ -111,6 +111,13 @@ namespace ChappellEberle_Assign1
             // Users input variable
             string UInput;
 
+            // Test guildDict
+            //foreach (KeyValuePair<uint, string> guild in guildDict)
+            //{
+            //    Console.WriteLine(guild.Value);          
+            //}
+
+
             // Decide what to do with input
             do
             {
@@ -177,9 +184,14 @@ namespace ChappellEberle_Assign1
                         string case4Input = Console.ReadLine();
 
                         // Print gear for player
-                        foreach(var player in playerList.Where(x => x.PlayerName == case4Input))
+                        foreach(Player player in playerList.Where(x => x.PlayerName == case4Input))
                         {
-                            Console.WriteLine(player.Gear);
+                            uint gearItem;
+                            foreach (uint item in player.Gear)
+                            {
+                                gearItem = player.Gear[item];
+                                Console.WriteLine(gearItem);
+                            }
                         }
 
                         break;
@@ -222,15 +234,11 @@ namespace ChappellEberle_Assign1
                             {
                                 foreach (var player in playerList.Where(x => x.PlayerName == case6Input))
                                 {
-                                    //player.GuildID = Convert.ToUInt32(givenGuild);
-                                    // BUG: Does not apply the new guild.
-                                    Console.WriteLine("{0} joined guild with ID = {1}", case6Input, givenGuild);
-
+                                    player.GuildID = Convert.ToUInt32(guild.Key);
+                                    Console.WriteLine("{0} joined {1}", case6Input, givenGuild);
                                 }
                             }
                         }
-                        //Console.WriteLine("{0} joined guild with ID = {1}", inputPlayer, outGuild);
-                
 
                         break;
 
@@ -256,17 +264,17 @@ namespace ChappellEberle_Assign1
                         Console.Write("Enter the amount of experience to award:\t");
                         uint expAward = Convert.ToUInt32(Console.ReadLine());
 
-                        // If the player exists 
+                        // If the player exists
                         foreach (Player player in playerList.Where(x => x.PlayerName == currPlayerName))
                         {
-                            // Currently kind of funky
+                            // Currently calculating incorrectly
                             player.LevelUp(expAward);
                         }
 
                         break;
 
                     case "T":
-                        // 9*. Don't show in menu but Icomparble
+                        // T. Don't show in menu but IComparable
                         Console.WriteLine("T");
                         break;
 
@@ -651,10 +659,15 @@ namespace ChappellEberle_Assign1
 
         // Gear Get/Set
         // Not functioning properly
-        public uint[] /*this[uint index]*/ Gear
+        //public uint this[uint index]
+        //{
+        //    get { return gear[index]; }
+        //    set { gear[index] = value; }
+        //}
+        public uint[] Gear
         {
-            get { return this.gear/*[index]*/; }
-            set { gear/*[index]*/ = value; }
+            get { return gear; }
+            set { gear = value; }
         }
 
         // CompareTo for Player
@@ -681,8 +694,11 @@ namespace ChappellEberle_Assign1
         // ToString Override for Player
         public override string ToString()
         {
-            //string guildName = guildDict[this.GuildID];
-
+            //foreach (KeyValuePair<uint, string> guild in guildDict)
+            //{
+            //    Console.WriteLine(guild.Value);
+            //}
+ 
             string output = String.Format(
             "Name: {0, -17} Race: {1, -12} Level: {2, -6} Guild: {3, -15}",
             this.PlayerName,
@@ -714,20 +730,23 @@ namespace ChappellEberle_Assign1
 
         }
 
+        // LevelUp
         public void LevelUp(uint expAward)
         {
-            // XP Threshold = Current Level * 1000
-            this.Exp += expAward;
+            //xpThreshold = current level * 1000
+            uint expthresh = this.PlayerLevel * 1000;
 
-            uint expThreshold = 1000;
+            uint currEXP = 0;
 
-            if((this.Exp * this.PlayerLevel) / expThreshold == 1)
+            currEXP += expAward;
+            if(currEXP >= expthresh)
             {
-
-                this.playerLevel++;
-                this.Exp = 0;
-                //expThreshold = this.PlayerLevel;
+                this.PlayerLevel++;
             }
+
+
+            //this.playerLevel = 13;
+
         }
     }
 }
