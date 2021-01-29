@@ -247,6 +247,22 @@ namespace ChappellEberle_Assign1
                     case "9":
                         // 9. Award Experience
                         Console.WriteLine("Award Experience");
+
+                        // Which player?
+                        Console.Write("Enter the player name:\t");
+                        string currPlayerName = Console.ReadLine();
+
+                        // Give experience amount
+                        Console.Write("Enter the amount of experience to award:\t");
+                        uint expAward = Convert.ToUInt32(Console.ReadLine());
+
+                        // If the player exists 
+                        foreach (Player player in playerList.Where(x => x.PlayerName == currPlayerName))
+                        {
+                            // Currently kind of funky
+                            player.LevelUp(expAward);
+                        }
+
                         break;
 
                     case "T":
@@ -697,6 +713,21 @@ namespace ChappellEberle_Assign1
         {
 
         }
-    }
 
+        public void LevelUp(uint expAward)
+        {
+            // XP Threshold = Current Level * 1000
+            this.Exp += expAward;
+
+            uint expThreshold = 1000;
+
+            if((this.Exp * this.PlayerLevel) / expThreshold == 1)
+            {
+
+                this.playerLevel++;
+                this.Exp = 0;
+                //expThreshold = this.PlayerLevel;
+            }
+        }
+    }
 }
